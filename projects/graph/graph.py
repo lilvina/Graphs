@@ -62,29 +62,69 @@ class Graph:
                 # add all of its neighbors to the top of the stack
                 for neighbor in self.vertices[v]:
                     s.push(neighbor)
+
+
     def dft_recursive(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         This should be done using recursion.
         """
-        pass  # TODO
+        pass
+
     def bfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing the shortest path from
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
+        # Create an empty set to store visited nodes
+        visited = set()
+        # Create an empty Queue and enqueue A PATH TO the starting vertex
+        path = Queue()
+        path.enqueue([starting_vertex])
+        # While the queue is not empty...
+        while path.size() > 0:
+            # Dequeue the first PATH
+            current_path = path.dequeue()
+            # GRAB THE VERTEX FROM THE END OF THE PATH
+            if current_path[len(current_path)-1] == destination_vertex:
+                return current_path
+            else:
+                v = current_path[len(current_path)-1]
+                visited.add(v)
+                for neighbor in self.vertices[v]:
+                    path_new = current_path.copy()
+                    path_new.append(neighbor)
+                    path.enqueue(path_new)
+            # IF VERTEX = TARGET, RETURN PATH
+            # If that vertex has not been visited...
+                # Mark it as visited
+                # Then add A PATH TO all of its neighbors to the back of the queue
+                    # Copy the path
+                    # Append neighbor to the back of the copy
+                    # Enqueue copy
     def dfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        pass  # TODO
+        visited = set()
+        path = Stack()
+        path.push([starting_vertex])
 
-
+        while path.size() > 0:
+            current_path = path.pop()
+            if current_path[len(current_path) - 1] == destination_vertex:
+                return current_path
+            else:
+                v = current_path[len(current_path) - 1]
+                visited.add(v)
+                for neighbor in self.vertices[v]:
+                    path_new = current_path.copy()
+                    path_new.append(neighbor)
+                    path.push(path_new)
 
 
 
